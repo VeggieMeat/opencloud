@@ -2,3 +2,5 @@ name = Opencloud
 description = Allows Openstack deployments to be managed by Drupal
 package = Opencloud
 core = 7.x
+
+dependencies[] = libraries
