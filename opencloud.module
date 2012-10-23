@@ -1,0 +1,87 @@
+<?php
+
+/**
+ * @file
+ * Allows Openstack deployments to be managed through Drupal.
+ *
+ * @author Brian Altenhofel
+ * Copyright 2012 Continuum Progressum, LLC
+ */
+
+/**
+ * Implements hook_libraries_info().
+ */
+function opencloud_libraries_info() {
+  $libraries['php-opencloud'] = array(
+    'name' => 'PHP-Opencloud',
+    'vendor url' => 'https://github.com/rackspace/php-opencloud',
+    'download url' => 'https://github.com/downloads/rackspace/php-opencloud/php-opencloud-1.0_50.zip',
+    'path' => 'lib',
+    'version' => '1.0-50',
+    'files' => array(
+      'php' => array(
+        'base.inc',
+        'cloud.inc',
+        'collection.inc',
+        'compute.inc',
+        'container.inc',
+        'database.inc',
+        'dataobject.inc',
+        'dbservice.inc',
+        'exceptions.inc',
+        'flavor.inc',
+        'globals.inc',
+        'http.inc',
+        'image.inc',
+        'instance.inc',
+        'lbservice.inc',
+        'loadbalancer.inc',
+        'metadata.inc',
+        'network.inc',
+        'nova.inc',
+        'objectstore.inc',
+        'objstorebase.inc',
+        'openstack.inc',
+        'persistentobject.inc',
+        'rackspace.inc',
+        'server.inc',
+        'servermetadata.inc',
+        'service.inc',
+        'snapshot.inc',
+        'user.inc',
+        'volume.inc',
+        'volumeservice.inc',
+        'volumetype.inc',
+      ),
+    ),
+  );
+
+  return $libraries;
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function opencloud_requirements() {
+  $t = get_t();
+  $requirements = array();
+
+  $info = libraries_load('php-opencloud');
+  if (!$info['loaded']) {
+    $requirements['opencloud'] = array(
+      'severity' => REQUIREMENT_ERROR,
+      'title' => $t('PHP-Opencloud API'),
+      'value' => $t('Failed to load the PHP-Opencloud API'),
+      'description' => $t('Please make sure the PHP-Opencloud API library is installed in the libraries directory.'),
+    );
+  }
+  else {
+    $requirements['opencloud'] = array(
+      'severity' => REQUIREMENT_INFO,
+      'title' => $t('PHP-Opencloud API'),
+      'value' => $info['version'],
+    );
+  }
+
+  return $requirements;
+}
