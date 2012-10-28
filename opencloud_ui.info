@@ -1,0 +1,6 @@
+name = Opencloud UI
+description = Defines common elements for Opencloud UI
+package = Opencloud
+core = 7.x
+
+dependencies[] = opencloud
