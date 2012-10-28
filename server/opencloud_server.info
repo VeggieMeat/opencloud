@@ -1,0 +1,6 @@
+name = Opencloud Server
+description = Allows Openstack servers to be managed by Drupal
+package = Opencloud
+core = 7.x
+
+dependencies[] = opencloud_provider

@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file
+ * Allows Openstack servers to be managed through Drupal.
+ */
+
+/**
+ * Implements hook_entity_info().
+ */
+function opencloud_server_entity_info() {
+  $entity = array(
+    'opencloud_server' => array(
+      'label' => t('Server'),
+      'entity class' => 'OpencloudServer',
+      'controller class' => 'OpencloudServerController',
+      'base table' => 'opencloud_server',
+      'fieldable' => TRUE,
+      'entity keys' => array(
+        'id' => 'server_id',
+        'bundle' => 'provider_id',
+        'label' => 'name',
+      ),
+      'bundle keys' => array(
+        'bundle' => 'provider_id',
+      ),
+      'view modes' => array(
+        'administrator' => array(
+          'label' => t('Administrator'),
+          'custom settings' => FALSE,
+        ),
+        'customer' => array(
+          'label' => t('Customer'),
+          'custom settings' => FALSE,
+        ),
+      ),
+      'token type' => 'opencloud-server',
+    ),
+  );
+
+  return $entity;
+}
+
+class OpencloudServerController extends EntityAPIController {
+}
+
+class OpencloudServer extends Entity {
+}
