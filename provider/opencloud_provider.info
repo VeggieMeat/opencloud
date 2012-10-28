@@ -1,0 +1,7 @@
+name = Opencloud Provider
+description = Allows Openstack providers to be managed by Drupal
+package = Opencloud
+core = 7.x
+
+dependencies[] = opencloud
+dependencies[] = entity

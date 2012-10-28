@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * @file
+ * Manages schema install, update, and uninstall tasks.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function opencloud_provider_schema() {
+  $schema = array();
+
+  $schema['opencloud_provider'] = array(
+    'description' => 'The base table for Opencloud managed providers.',
+    'fields' => array(
+      'provider_id' => array(
+        'description' => 'The primary identifier for a provider, used internally.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'name' => array(
+        'description' => 'The name of this provider.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+ /*     'platform' => array(
+        'description' => 'The platform that this provider runs.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),*/
+      'tenant_id' => array(
+        'description' => 'The tenant ID for this provider.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'username' => array(
+        'description' => 'The username used for this provider.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'password' => array(
+        'description' => 'The password or key to use for this provider.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'token' => array(
+        'description' => 'The authentication token to use for this provider.',
+        'type' => 'varchar',
+        'length' => 36,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the provider was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'updated' => array(
+        'description' => 'The Unix timestamp when the provider was most recently updated.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('provider_id'),
+  );
+
+  return $schema;
+}

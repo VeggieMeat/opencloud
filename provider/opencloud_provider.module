@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Allows Openstack providers to be managed through Drupal.
+ */
+
+/**
+ * Implements hook_entity_info().
+ */
+function opencloud_provider_entity_info() {
+  $entity = array(
+    'opencloud_provider' => array(
+      'label' => t('Provider'),
+      'entity class' => 'OpencloudProvider',
+      'controller class' => 'OpencloudProviderController',
+      'base table' => 'opencloud_provider',
+      'fieldable' => TRUE,
+      'entity keys' => array(
+        'id' => 'provider_id',
+        'label' => 'name',
+      ),
+      'view modes' => array(
+        'administrator' => array(
+          'label' => t('Administrator'),
+          'custom settings' => FALSE,
+        ),
+        'customer' => array(
+          'label' => t('Customer'),
+          'custom settings' => FALSE,
+        ),
+      ),
+      'token type' => 'opencloud-provider',
+    ),
+  );
+
+  return $entity;
+}
+
+class OpencloudProviderController extends EntityAPIController {
+}
+
+class OpencloudProvider extends Entity {
+}
