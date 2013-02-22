@@ -26,12 +26,6 @@ function opencloud_provider_schema() {
         'length' => 255,
         'not null' => TRUE,
       ),
- /*     'platform' => array(
-        'description' => 'The platform that this provider runs.',
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => TRUE,
-      ),*/
       'tenant_id' => array(
         'description' => 'The tenant ID for this provider.',
         'type' => 'varchar',
