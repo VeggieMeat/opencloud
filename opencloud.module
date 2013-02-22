@@ -5,7 +5,6 @@
  * Allows Openstack deployments to be managed through Drupal.
  *
  * @author Brian Altenhofel
- * Copyright 2012 Continuum Progressum, LLC
  */
 
 /**
