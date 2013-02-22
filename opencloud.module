@@ -3,8 +3,6 @@
 /**
  * @file
  * Allows Openstack deployments to be managed through Drupal.
- *
- * @author Brian Altenhofel
  */
 
 /**
