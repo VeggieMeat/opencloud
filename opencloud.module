@@ -90,9 +90,9 @@ function opencloud_requirements() {
 }
 
 /**
- * Implements hook_init().
+ * Loads the PHP-Opencloud library.
  */
-function opencloud_init() {
+function opencloud_load_library() {
   if (($library = libraries_detect('php-opencloud')) && !empty($library['installed'])) {
       libraries_load('php-opencloud');
   }
