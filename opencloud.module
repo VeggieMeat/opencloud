@@ -88,3 +88,12 @@ function opencloud_requirements() {
 
   return $requirements;
 }
+
+/**
+ * Implements hook_init().
+ */
+function opencloud_init() {
+  if (($library = libraries_detect('php-opencloud')) && !empty($library['installed'])) {
+      libraries_load('php-opencloud');
+  }
+}
