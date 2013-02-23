@@ -5,3 +5,5 @@ core = 7.x
 
 dependencies[] = opencloud
 dependencies[] = entity
+
+files[] = includes/opencloud_provider.controller.inc
