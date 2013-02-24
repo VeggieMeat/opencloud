@@ -12,7 +12,9 @@ function opencloud_provider_entity_info() {
   $entity = array(
     'opencloud_provider' => array(
       'label' => t('Provider'),
-      'controller class' => 'OpencloudProviderEntityController',
+      'plural label' => t('Providers'),
+      'description' => t('OpenStack providers'),
+      'controller class' => 'EntityAPIController',
       'base table' => 'opencloud_provider',
       'fieldable' => TRUE,
       'entity keys' => array(
