@@ -46,13 +46,11 @@ function opencloud_provider_entity_property_info() {
 
   $properties['provider_id'] = array(
     'label' => t('Provider ID'),
-    'type' => 'integer',
     'description' => t('The unique provider ID.'),
     'schema field' => 'provider_id',
   );
   $properties['name'] = array(
     'label' => t('Name'),
-    'type' => 'text',
     'description' => t('The name of the provider.'),
     'setter callback' => 'entity_property_verbatim_set',
     'required' => TRUE,
@@ -60,7 +58,6 @@ function opencloud_provider_entity_property_info() {
   );
   $properties['tenant_id'] = array(
     'label' => t('Tenant ID'),
-    'type' => 'text',
     'description' => t('The tenant ID for the provider.'),
     'setter callback' => 'entity_property_verbatim_set',
     'required' => TRUE,
@@ -68,7 +65,6 @@ function opencloud_provider_entity_property_info() {
   );
   $properties['username'] = array(
     'label' => t('Username'),
-    'type' => 'text',
     'description' => t('The username for the provider.'),
     'setter callback' => 'entity_property_verbatim_set',
     'required' => TRUE,
@@ -76,7 +72,6 @@ function opencloud_provider_entity_property_info() {
   );
   $properties['password'] = array(
     'label' => t('Password'),
-    'type' => 'text',
     'description' => t('The password or key for the provider.'),
     'setter callback' => 'entity_property_verbatim_set',
     'required' => TRUE,
