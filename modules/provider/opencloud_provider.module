@@ -133,7 +133,7 @@ function opencloud_provider_field_extra_fields() {
       ),
       'password' => array(
         'label' => t('Password'),
-        'description' => t('The password or key to use for this provider.',
+        'description' => t('The password or key to use for this provider.'),
         'weight' => 5,
       ),
     ),
