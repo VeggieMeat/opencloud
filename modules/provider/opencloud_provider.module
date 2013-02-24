@@ -29,7 +29,6 @@ function opencloud_provider_entity_info() {
           'custom settings' => FALSE,
         ),
       ),
-      'token type' => 'opencloud-provider',
     ),
   );
 
