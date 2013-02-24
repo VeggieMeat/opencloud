@@ -36,6 +36,55 @@ function opencloud_provider_entity_info() {
 }
 
 /**
+ * Implements hook_entity_property_info().
+ */
+function opencloud_provider_entity_property_info() {
+  $info = array();
+  $properties = &$info['opencloud_provider']['properties'];
+
+  $properties['provider_id'] = array(
+    'label' => t('Provider ID'),
+    'type' => 'integer',
+    'description' => t('The unique provider ID.'),
+    'schema field' => 'provider_id',
+  );
+  $properties['name'] = array(
+    'label' => t('Name'),
+    'type' => 'text',
+    'description' => t('The name of the provider.'),
+    'setter callback' => 'entity_property_verbatim_set',
+    'required' => TRUE,
+    'schema field' => 'name',
+  );
+  $properties['tenant_id'] = array(
+    'label' => t('Tenant ID'),
+    'type' => 'text',
+    'description' => t('The tenant ID for the provider.'),
+    'setter callback' => 'entity_property_verbatim_set',
+    'required' => TRUE,
+    'schema field' => 'tenant_id',
+  );
+  $properties['username'] = array(
+    'label' => t('Username'),
+    'type' => 'text',
+    'description' => t('The username for the provider.'),
+    'setter callback' => 'entity_property_verbatim_set',
+    'required' => TRUE,
+    'schema field' => 'username',
+  );
+  $properties['password'] = array(
+    'label' => t('Password'),
+    'type' => 'text',
+    'description' => t('The password or key for the provider.'),
+    'setter callback' => 'entity_property_verbatim_set',
+    'required' => TRUE,
+    'schema field' => 'password',
+  );
+
+  return $info;
+}
+
+/**
  * Implements hook_field_extra_fields().
  */
 function opencloud_provider_field_extra_fields() {
