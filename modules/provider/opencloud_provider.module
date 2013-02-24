@@ -34,3 +34,59 @@ function opencloud_provider_entity_info() {
 
   return $entity;
 }
+
+/**
+ * Implements hook_field_extra_fields().
+ */
+function opencloud_provider_field_extra_fields() {
+  $extra = array();
+
+  $extra['opencloud_provider']['opencloud_provider'] = array(
+    'form' => array(
+      'name' => array(
+        'label' => t('Name'),
+        'description' => t('The provider name form element.'),
+        'weight' => -10,
+      ),
+      'tenant_id' => array(
+        'label' => t('Tenant ID'),
+        'description' => t('The tenant ID form element.'),
+        'weight' => -5,
+      ),
+      'username' => array(
+        'label' => t('Username'),
+        'description' => t('The username form element.'),
+        'weight' => 0,
+      ),
+      'password' => array(
+        'label' => t('Password'),
+        'description' => t('The password form element.'),
+        'weight' => 5,
+      ),
+    ),
+    'display' => array(
+      'name' => array(
+        'label' => t('Name'),
+        'description' => t('The name of this provider.'),
+        'weight' => -10,
+      ),
+      'tenant_id' => array(
+        'label' => t('Tenant ID'),
+        'description' => t('The tenant ID for this provider.'),
+        'weight' => -5,
+      ),
+      'username' => array(
+        'label' => t('Username'),
+        'description' => t('The username used for this provider.'),
+        'weight' => 0,
+      ),
+      'password' => array(
+        'label' => t('Password'),
+        'description' => t('The password or key to use for this provider.',
+        'weight' => 5,
+      ),
+    ),
+  );
+
+  return $extra;
+}
