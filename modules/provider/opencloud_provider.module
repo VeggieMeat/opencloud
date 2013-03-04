@@ -221,6 +221,7 @@ function opencloud_provider_connect($provider) {
       'username' => $provider->username,
       'password' => $provider->password,
     );
+  }
 
   // Create a new connection object.
   return new $class($provider->url, array($credentials));
