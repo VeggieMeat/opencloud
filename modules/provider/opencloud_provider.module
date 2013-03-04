@@ -138,6 +138,16 @@ function opencloud_provider_field_extra_fields() {
 }
 
 /**
+ * Create a Provider.
+ *
+ * @return obj
+ *   An new Provider object.
+ */
+function opencloud_provider_create($values = array()) {
+  return entity_create('opencloud_provider', $values);
+}
+
+/**
  * Load a Provider.
  *
  * @param int $provider_id
@@ -148,6 +158,32 @@ function opencloud_provider_field_extra_fields() {
  */
 function opencloud_provider_load($provider_id) {
   return reset(entity_load('opencloud_provider', array($provider_id)));
+}
+
+/**
+ * Save a Provider.
+ *
+ * @param obj $provider
+ *   The Provider to save.
+ *
+ * @return
+ *   SAVED_NEW or SAVED_UPDATED or FALSE
+ */
+function opencloud_provider_save($provider) {
+  return entity_save('opencloud_provider', $provider);
+}
+
+/**
+ * Delete a Provider.
+ *
+ * @param int $provider_id
+ *   The ID of the Provider to delete.
+ *
+ * @return
+ *   FALSE if no information was available on how to delete the Provider.
+ */
+function opencloud_provider_delete($provider_id) {
+  return entity_delete('opencloud_provider', $provider_id);
 }
 
 /**
