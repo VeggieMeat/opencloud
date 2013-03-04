@@ -56,12 +56,12 @@ function opencloud_provider_entity_property_info() {
     'required' => TRUE,
     'schema field' => 'name',
   );
-  $properties['tenant_id'] = array(
-    'label' => t('Tenant ID'),
-    'description' => t('The tenant ID for the provider.'),
+  $properties['url'] = array(
+    'label' => t('Authentication URL'),
+    'description' => t('The authentication URL for the provider.'),
     'setter callback' => 'entity_property_verbatim_set',
     'required' => TRUE,
-    'schema field' => 'tenant_id',
+    'schema field' => 'url',
   );
   $properties['username'] = array(
     'label' => t('Username'),
@@ -94,9 +94,9 @@ function opencloud_provider_field_extra_fields() {
         'description' => t('The provider name form element.'),
         'weight' => -10,
       ),
-      'tenant_id' => array(
-        'label' => t('Tenant ID'),
-        'description' => t('The tenant ID form element.'),
+      'url' => array(
+        'label' => t('Authentication URL'),
+        'description' => t('The authentication URL form element.'),
         'weight' => -5,
       ),
       'username' => array(
@@ -116,9 +116,9 @@ function opencloud_provider_field_extra_fields() {
         'description' => t('The name of this provider.'),
         'weight' => -10,
       ),
-      'tenant_id' => array(
-        'label' => t('Tenant ID'),
-        'description' => t('The tenant ID for this provider.'),
+      'url' => array(
+        'label' => t('Authentication URL'),
+        'description' => t('The authentication URL for this provider.'),
         'weight' => -5,
       ),
       'username' => array(
@@ -135,4 +135,44 @@ function opencloud_provider_field_extra_fields() {
   );
 
   return $extra;
+}
+
+/**
+ * Load a Provider.
+ *
+ * @param int $provider_id
+ *   The ID of the Provider to load.
+ *
+ * @return obj
+ *   The provider object.
+ */
+function opencloud_provider_load($provider_id) {
+  return reset(entity_load('opencloud_provider', array($provider_id)));
+}
+
+/**
+ * Connect to a Provider.
+ *
+ * @param obj $provider
+ *   The Provider to connect to.
+ *
+ * @return obj
+ *   An OpenStack connection to the Provider's service.
+ */
+function opencloud_provider_connect($provider) {
+  // Load the OpenCloud library. This point makes sense because it will always
+  // have to be loaded here.
+  opencloud_library_load();
+
+  // Some providers like Rackspace have special implementations of the API.
+  if (class_exists("OpenCloud\{$provider->name}")) {
+    $class = "OpenCloud\{$provider->name}";
+  }
+  else {
+    // Use the generic OpenStack class.
+    $class = 'OpenCloud\OpenStack';
+  }
+
+  // Create a new connection object.
+  return new $class($provider->url, array($provider->username, $provider->password));
 }
