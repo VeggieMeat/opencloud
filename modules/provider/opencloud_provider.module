@@ -162,7 +162,7 @@ function opencloud_provider_load($provider_id) {
 function opencloud_provider_connect($provider) {
   // Load the OpenCloud library. This point makes sense because it will always
   // have to be loaded here.
-  opencloud_library_load();
+  opencloud_load_library();
 
   // Some providers like Rackspace have special implementations of the API.
   if (class_exists("OpenCloud\{$provider->name}")) {
@@ -173,6 +173,19 @@ function opencloud_provider_connect($provider) {
     $class = 'OpenCloud\OpenStack';
   }
 
+  // Setup our credentials array.
+  if ('Rackspace' == $provider->name) {
+    $credentials = array(
+      'username' => $provider->username,
+      'apiKey' => $provider->password,
+    );
+  }
+  else {
+    $credentials = array(
+      'username' => $provider->username,
+      'password' => $provider->password,
+    );
+
   // Create a new connection object.
-  return new $class($provider->url, array($provider->username, $provider->password));
+  return new $class($provider->url, array($credentials));
 }
