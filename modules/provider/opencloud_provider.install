@@ -26,8 +26,8 @@ function opencloud_provider_schema() {
         'length' => 255,
         'not null' => TRUE,
       ),
-      'tenant_id' => array(
-        'description' => 'The tenant ID for this provider.',
+      'url' => array(
+        'description' => 'The authentication URL for this provider.',
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
@@ -43,11 +43,6 @@ function opencloud_provider_schema() {
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
-      ),
-      'token' => array(
-        'description' => 'The authentication token to use for this provider.',
-        'type' => 'varchar',
-        'length' => 36,
       ),
       'created' => array(
         'description' => 'The Unix timestamp when the provider was created.',
