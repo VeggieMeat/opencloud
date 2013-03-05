@@ -32,6 +32,12 @@ function opencloud_provider_schema() {
         'length' => 255,
         'not null' => TRUE,
       ),
+      'region' => array(
+        'description' => 'The region these credentials apply to.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
       'username' => array(
         'description' => 'The username used for this provider.',
         'type' => 'varchar',

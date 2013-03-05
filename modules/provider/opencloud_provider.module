@@ -63,7 +63,14 @@ function opencloud_provider_entity_property_info() {
     'required' => TRUE,
     'schema field' => 'url',
   );
-  $properties['username'] = array(
+  $properties['region'] = array(
+    'label' => t('Region'),
+    'description' => t('The region these credentials apply to.'),
+    'setter callback' => 'entity_property_verbatim_set',
+    'required' => TRUE,
+    'schema field' => 'region',
+  );
+ $properties['username'] = array(
     'label' => t('Username'),
     'description' => t('The username for the provider.'),
     'setter callback' => 'entity_property_verbatim_set',
@@ -99,7 +106,12 @@ function opencloud_provider_field_extra_fields() {
         'description' => t('The authentication URL form element.'),
         'weight' => -5,
       ),
-      'username' => array(
+      'region' => array(
+        'label' => t('Region'),
+        'description' => t('The region form element.'),
+        'weight' => 0,
+      ),
+     'username' => array(
         'label' => t('Username'),
         'description' => t('The username form element.'),
         'weight' => 0,
@@ -107,7 +119,7 @@ function opencloud_provider_field_extra_fields() {
       'password' => array(
         'label' => t('Password'),
         'description' => t('The password form element.'),
-        'weight' => 5,
+        'weight' => 0,
       ),
     ),
     'display' => array(
@@ -120,6 +132,11 @@ function opencloud_provider_field_extra_fields() {
         'label' => t('Authentication URL'),
         'description' => t('The authentication URL for this provider.'),
         'weight' => -5,
+      ),
+      'region' => array(
+        'label' => t('Region'),
+        'description' => t('The region used for this provider.'),
+        'weight' => 0,
       ),
       'username' => array(
         'label' => t('Username'),
