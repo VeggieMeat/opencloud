@@ -162,6 +162,16 @@ function opencloud_provider_permission() {
 }
 
 /**
+ * Implements hook_views_api().
+ */
+function opencloud_provider_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'opencloud_provider') . '/includes/views',
+  );
+}
+
+/**
  * Create a Provider.
  *
  * @return obj
