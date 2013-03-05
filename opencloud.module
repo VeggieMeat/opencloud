@@ -97,3 +97,75 @@ function opencloud_load_library() {
       libraries_load('php-opencloud');
   }
 }
+
+/**
+ * Generic access control for Opencloud entities.
+ *
+ * @param string $op
+ *   The operation being performed:
+ *   - create: The entity is being created.
+ *   - view: The entity is being viewed.
+ *   - update: The entity is being updated.
+ *   - delete: The entity is being deleted.
+ * @param obj $entity
+ *   (optional) The entity to check access for.
+ * @param obj $account
+ *   (optional) The account to check access for.
+ * @param string $entity_type
+ *   The entity type to check access for.
+ *
+ * @return bool
+ *   Whether or not the user can access the entity.
+ */
+function opencloud_entity_access($op, $entity = NULL, $account = NULL, $entity_type) {
+  global $user;
+  $account = isset($account) ? $account : $user;
+
+  // Grant access to users with administration access.
+  if (user_access('administer ' . $entity_type . ' entities', $account)) {
+    return TRUE;
+  }
+
+  if ('update' == $op) {
+    return user_access('edit ' . $entity_type . ' entities', $account);
+  }
+  else {
+    return user_access("{$op} {$entity_type} entities", $account);
+  }
+}
+
+/**
+ * Generic permissions for Opencloud entity types.
+ *
+ * @param string $entity_type
+ *   The entity type to generate permissions for.
+ *
+ * @return array
+ *   An array with permissions settings for a given entity type.
+ */
+function opencloud_entity_access_permissions($entity_type) {
+  $entity_info = entity_get_info($entity_type);
+
+  $permissions = array();
+
+  // 'administer' permission
+  $permissions['administer ' . $entity_type . 'entities'] = array(
+    'title' => t('Administer @entity_type', array('@entity_type' => $entity_info['plural label'])),
+  );
+  // 'create' permission
+  $permissions['create ' . $entity_type . 'entities'] = array(
+    'title' => t('Create @entity_type', array('@entity_type' => $entity_info['plural label'])),
+  );
+  // 'view' permission
+  $permissions['view ' . $entity_type . 'entities'] = array(
+    'title' => t('View @entity_type', array('@entity_type' => $entity_info['plural label'])),
+  );
+  // 'edit' permission
+  $permissions['edit ' . $entity_type . 'entities'] = array(
+    'title' => t('Edit @entity_type', array('@entity_type' => $entity_info['plural label'])),
+  );
+  // 'delete' permission
+  $permissions['delete ' . $entity_type . 'entities'] = array(
+    'title' => t('Delete @entity_type', array('@entity_type' => $entity_info['plural label'])),
+  );
+}
