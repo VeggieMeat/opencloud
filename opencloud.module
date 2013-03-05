@@ -168,4 +168,6 @@ function opencloud_entity_access_permissions($entity_type) {
   $permissions['delete ' . $entity_type . 'entities'] = array(
     'title' => t('Delete @entity_type', array('@entity_type' => $entity_info['plural label'])),
   );
+
+  return $permissions;
 }
