@@ -155,6 +155,13 @@ function opencloud_provider_field_extra_fields() {
 }
 
 /**
+ * Implements hook_permission().
+ */
+function opencloud_provider_permission() {
+  return opencloud_entity_access_permissions('opencloud_provider');
+}
+
+/**
  * Create a Provider.
  *
  * @return obj
@@ -201,6 +208,23 @@ function opencloud_provider_save($provider) {
  */
 function opencloud_provider_delete($provider_id) {
   return entity_delete('opencloud_provider', $provider_id);
+}
+
+/**
+ * Check provider access.
+ *
+ * @param string $op
+ *   The operation being performed.
+ * @param obj $provider
+ *   (optional) The provider to check access for.
+ * @param obj $account
+ *   (optional) The account to check access for.
+ *
+ * @return bool
+ *   Whether or not the user has access to this provider.
+ */
+function opencloud_provider_access($op, $product = NULL, $account = NULL) {
+  return opencloud_access($op, $product, $account, 'opencloud_provider');
 }
 
 /**
