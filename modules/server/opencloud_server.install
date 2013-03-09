@@ -21,7 +21,7 @@ function opencloud_server_schema() {
         'not null' => TRUE,
       ),
       'provider_id' => array(
-        'description' => 'The {opencloud_provider}.provider used for this server.',
+        'description' => 'The {opencloud_provider}.provider_id used for this server.',
         'type' => 'int',
         'not null' => TRUE,
         'unsigned' => TRUE,
@@ -78,18 +78,17 @@ function opencloud_server_schema() {
         'type' => 'text',
         'size' => 'normal',
       ),
-      'metadata' => array(
-        'description' => 'A serialized array containing metadata key-value pairs for the server.',
-        'type' => 'text',
-        'size' => 'normal',
-      ),
     ),
     'primary key' => array('server_id'),
     'indexes' => array(
-      'id' => array('id'),
+      'server_id' => array('server_id'),
       'uuid' => array('uuid'),
       'image' => array('image'),
       'flavor' => array('flavor'),
+    ),
+    'foreign keys' => array(
+      'provider_id' => 'opencloud_provider',
+      'columns' => array('provider_id' => 'provider_id'),
     ),
   );
 
