@@ -232,6 +232,8 @@ function opencloud_server_delete($server_id) {
  * @return bool
  *   Whether or not the user has access to this server.
  */
-function opencloud_provider_access($op, $server = NULL, $account = NULL) {
+function opencloud_server_access($op, $server = NULL, $account = NULL) {
   return opencloud_access($op, $server, $account, 'opencloud_server');
 }
+
+
