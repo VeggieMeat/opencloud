@@ -281,4 +281,6 @@ function opencloud_provider_connect($provider) {
   if ('Rackspace' == $provider->name) {
     $cloud->SetDefaults('Compute', 'cloudServersOpenStack', 'publicURL', $provider->region);
   }
+
+  return $cloud;
 }
