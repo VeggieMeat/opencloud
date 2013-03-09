@@ -309,12 +309,13 @@ function opencloud_server_import_all_servers($provider_id) {
       'provider_id' => $provider_id,
       'status' => $server->status,
       'uuid' => $server->id,
-      'hostid' => $server->hostid,
+      'hostid' => $server->hostId,
       'image' => $server->image->id,
       'flavor' => $server->flavor->id,
       'addresses' => json_encode($server->addresses),
     );
-    opencloud_server_create($values);
+    $entity = opencloud_server_create($values);
+    opencloud_server_save($entity);
   }
 }
 
