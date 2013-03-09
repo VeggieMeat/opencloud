@@ -277,6 +277,48 @@ function opencloud_server_fetch_server($compute, $uuid) {
 }
 
 /**
+ * Retrieve a list of all servers for a provider.
+ *
+ * @param int $provider_id
+ *   The provider to retrieve a list of servers from.
+ *
+ * @return array
+ *   An array of server objects.
+ */
+function opencloud_server_fetch_all_servers($provider_id) {
+  $return = array();
+  $serverList = opencloud_server_compute($provider_id)->serverList();
+  while ($server = $serverList->Next()) {
+    $return[] = $server;
+  }
+  return $return;
+}
+
+/**
+ * Import servers from a provider.
+ *
+ * @param int $provider_id
+ *   The provider to import servers from.
+ */
+function opencloud_server_import_all_servers($provider_id) {
+  $servers = opencloud_server_fetch_all_servers($provider_id);
+
+  foreach ($servers as $server) {
+    $values = array(
+      'name' => $server->name,
+      'provider_id' => $provider_id,
+      'status' => $server->status,
+      'uuid' => $server->id,
+      'hostid' => $server->hostid,
+      'image' => $server->image->id,
+      'flavor' => $server->flavor->id,
+      'addresses' => json_encode($server->addresses),
+    );
+    opencloud_server_create($values);
+  }
+}
+
+/**
  * Rebuild an existing server.
  *
  * @param string $id

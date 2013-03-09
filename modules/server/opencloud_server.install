@@ -41,7 +41,7 @@ function opencloud_server_schema() {
       'hostid' => array(
         'description' => 'The remote host ID of this server.',
         'type' => 'varchar',
-        'length' => 36,
+        'length' => 96,
       ),
       'uuid' => array(
         'description' => 'The remote UUID of this server.',
