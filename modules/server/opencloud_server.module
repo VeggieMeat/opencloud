@@ -12,8 +12,9 @@ function opencloud_server_entity_info() {
   $entity = array(
     'opencloud_server' => array(
       'label' => t('Server'),
-      'entity class' => 'OpencloudServer',
-      'controller class' => 'OpencloudServerController',
+      'plural label' => t('Servers'),
+      'description' => t('OpenStack servers'),
+      'controller class' => 'EntityAPIController',
       'base table' => 'opencloud_server',
       'fieldable' => TRUE,
       'entity keys' => array(
@@ -34,15 +35,137 @@ function opencloud_server_entity_info() {
           'custom settings' => FALSE,
         ),
       ),
-      'token type' => 'opencloud-server',
     ),
   );
 
   return $entity;
 }
 
-class OpencloudServerController extends EntityAPIController {
+/**
+ * Implements hook_entity_property_info().
+ */
+function opencloud_server_entity_property_info() {
+  $info = array();
+  $properties = &$info['opencloud_server']['properties'];
+
+  $properties['server_id'] = array(
+    'label' => t('Server ID'),
+    'description' => t('The unique server ID.'),
+    'schema field' => 'server_id',
+  );
+  $properties['provider_id'] = array(
+    'label' => t('Provider ID'),
+    'description' => t('The Provider this server belongs to.'),
+    'setter callback' => 'entity_property_verbatim_set',
+    'required' => TRUE,
+    'schema field' => 'provider_id',
+  );
+  $properties['name'] = array(
+    'label' => t('Name'),
+    'description' => t('The name of the server.'),
+    'setter callback' => 'entity_property_verbatim_set',
+    'required' => TRUE,
+    'schema field' => 'name',
+  );
+  $properties['status'] = array(
+    'label' => t('Status'),
+    'description' => t('The current status of this server.'),
+    'setter callback' => 'entity_property_verbatim_set',
+    'schema field' => 'status',
+  );
+  $properties['hostid'] = array(
+    'label' => t('Host ID'),
+    'description' => t('The host that this server resides on.'),
+    'setter callback' => 'entity_property_verbatim_set',
+    'schema field' => 'hostid',
+  );
+  $properties['uuid'] = array(
+    'label' => t('UUID'),
+    'description' => t('The UUID of this server.'),
+    'setter callback' => 'entity_property_verbatim_set',
+    'schema field' => 'uuid',
+  );
+  $properties['image'] = array(
+    'label' => t('Image UUID'),
+    'description' => t('The UUID of the image used to build this server.'),
+    'setter callback' => 'entity_property_verbatim_set',
+    'schema field' => 'image',
+  );
+  $properties['flavor'] = array(
+    'label' => t('Flavor'),
+    'description' => t('The flavor of this server.'),
+    'setter callback' => 'entity_property_verbatim_set',
+    'schema field' => 'flavor',
+  );
+  $properties['addresses'] = array(
+    'label' => t('IP Addresses'),
+    'description' => t('The networks and IP addresses for this server.'),
+    'setter callback' => 'entity_property_verbatim_set',
+    'schema field' => 'addresses',
+  );
+
+  return $info;
 }
 
-class OpencloudServer extends Entity {
+/**
+ * Implements hook_field_extra_fields().
+ */
+function opencloud_server_field_extra_fields() {
+  $extra = array();
+
+  $extra['opencloud_server']['opencloud_server'] = array(
+    'form' => array(
+      'name' => array(
+        'label' => t('Name'),
+        'description' => t('The server name form element.'),
+        'weight' => -10,
+      ),
+      'provider_id' => array(
+        'label' => t('Provider'),
+        'description' => t('The provider name form element.'),
+        'weight' => -5,
+      ),
+      'flavor' => array(
+        'label' => t('Flavor'),
+        'description' => t('The server flavor form element.'),
+        'weight' => 0,
+      ),
+     'image' => array(
+        'label' => t('Image'),
+        'description' => t('The server image form element.'),
+        'weight' => 0,
+      ),
+    ),
+    'display' => array(
+      'name' => array(
+        'label' => t('Name'),
+        'description' => t('The name of this server.'),
+        'weight' => -10,
+      ),
+      'provider_id' => array(
+        'label' => t('Provider'),
+        'description' => t('The provider for this server.'),
+        'weight' => -5,
+      ),
+      'flavor' => array(
+        'label' => t('Flavor'),
+        'description' => t('The flavor for this server.'),
+        'weight' => 0,
+      ),
+      'image' => array(
+        'label' => t('Image'),
+        'description' => t('The image to use for this server.'),
+        'weight' => 0,
+      ),
+    ),
+  );
+
+  return $extra;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function opencloud_server_permission() {
+  return opencloud_entity_access_permissions('opencloud_server');
 }
