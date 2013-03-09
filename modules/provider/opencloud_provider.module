@@ -233,8 +233,8 @@ function opencloud_provider_delete($provider_id) {
  * @return bool
  *   Whether or not the user has access to this provider.
  */
-function opencloud_provider_access($op, $product = NULL, $account = NULL) {
-  return opencloud_access($op, $product, $account, 'opencloud_provider');
+function opencloud_provider_access($op, $provider = NULL, $account = NULL) {
+  return opencloud_access($op, $provider, $account, 'opencloud_provider');
 }
 
 /**

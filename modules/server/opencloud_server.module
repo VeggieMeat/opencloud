@@ -218,3 +218,20 @@ function opencloud_server_save($server) {
 function opencloud_server_delete($server_id) {
   return entity_delete('opencloud_server', $server_id);
 }
+
+/**
+ * Check server access.
+ *
+ * @param string $op
+ *   The operation being performed.
+ * @param obj $server
+ *   (optional) The server to check access for.
+ * @param obj $account
+ *   (optional) The account to check access for.
+ *
+ * @return bool
+ *   Whether or not the user has access to this server.
+ */
+function opencloud_provider_access($op, $server = NULL, $account = NULL) {
+  return opencloud_access($op, $server, $account, 'opencloud_server');
+}
