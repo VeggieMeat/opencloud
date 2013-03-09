@@ -275,5 +275,10 @@ function opencloud_provider_connect($provider) {
   }
 
   // Create a new connection object.
-  return new $class($provider->url, $credentials);
+  $cloud = new $class($provider->url, $credentials);
+
+  // Set some default constants that deviate from normal.
+  if ('Rackspace' == $provider->name) {
+    $cloud->SetDefaults('Compute', 'cloudServersOpenStack', 'publicURL', $provider->region);
+  }
 }
