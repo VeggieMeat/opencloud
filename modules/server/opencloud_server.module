@@ -249,7 +249,7 @@ function opencloud_server_access($op, $server = NULL, $account = NULL) {
  */
 function opencloud_server_compute($provider_id) {
   $provider = opencloud_provider_load($provider_id);
-  $cloud = opencloud_provider_connect($provider->provider_id);
+  $cloud = opencloud_provider_connect($provider);
   return $cloud->Compute(NULL, $provider->region);
 }
 

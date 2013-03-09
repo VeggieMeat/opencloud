@@ -252,8 +252,8 @@ function opencloud_provider_connect($provider) {
   opencloud_load_library();
 
   // Some providers like Rackspace have special implementations of the API.
-  if (class_exists('OpenCloud\\' . $provider->name)) {
-    $class = 'OpenCloud\\' . $provider->name;
+  if (class_exists("OpenCloud\\{$provider->name}")) {
+    $class = "OpenCloud\\{$provider->name}";
   }
   else {
     // Use the generic OpenStack class.
@@ -279,7 +279,7 @@ function opencloud_provider_connect($provider) {
 
   // Set some default constants that deviate from normal.
   if ('Rackspace' == $provider->name) {
-    $cloud->SetDefaults('Compute', 'cloudServersOpenStack', 'publicURL', $provider->region);
+    $cloud->SetDefaults('Compute', 'cloudServersOpenStack', $provider->region);
   }
 
   return $cloud;
