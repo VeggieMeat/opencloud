@@ -169,3 +169,52 @@ function opencloud_server_field_extra_fields() {
 function opencloud_server_permission() {
   return opencloud_entity_access_permissions('opencloud_server');
 }
+
+/**
+ * Create a Server.
+ *
+ * @return obj
+ *   A new Server object.
+ */
+function opencloud_server_create($values = array()) {
+  return entity_create('opencloud_server', $values);
+}
+
+/**
+ * Load a Server.
+ *
+ * @param int $server_id
+ *   The ID of the Server to load.
+ *
+ * @return obj
+ *   The server object.
+ */
+function opencloud_server_load($server_id) {
+  return reset(entity_load('opencloud_server', array($server_id)));
+}
+
+/**
+ * Save a Server.
+ *
+ * @param obj $server
+ *   The Server to save.
+ *
+ * @return
+ *   SAVED_NEW or SAVED_UPDATED or FALSE
+ */
+function opencloud_server_save($server) {
+  return entity_save('opencloud_server', $server);
+}
+
+/**
+ * Delete a Server.
+ *
+ * @param int $server_id
+ *   The ID of the Server to delete.
+ *
+ * @return
+ *   FALSE if no information was available on how to delete the Server.
+ */
+function opencloud_server_delete($server_id) {
+  return entity_delete('opencloud_server', $server_id);
+}
