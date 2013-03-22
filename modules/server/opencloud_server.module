@@ -264,6 +264,24 @@ function opencloud_server_new_server($compute) {
 }
 
 /**
+ * Create a new server on the provider.
+ *
+ * @param obj $server
+ *   The Openstack server object.
+ * @param array $options
+ *   Certain options may be provided for build:
+ *   - name: Name the server.
+ *   - flavor: The flavor to use for the rebuild.
+ *   - image: The image to use for the rebuild.
+ */
+function opencloud_server_create_server($server, $options) {
+  $server->name = $options['name'];
+  $server->flavor = $options['flavor'];
+  $server->image = $options['image'];
+  $server->Create();
+}
+
+/**
  * Retrieve the data for an existing server.
  *
  * @param string $uuid
