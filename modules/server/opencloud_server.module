@@ -365,3 +365,57 @@ function opencloud_server_rebuild_server($id, $options = array()) {
   opencloud_server_compute($server->provider_id)->Server($server->uuid)->Rebuild($options);
   opencloud_server_save($server);
 }
+
+/**
+ * Get a list of available flavors.
+ *
+ * @param obj $compute
+ *   An Openstack compute connection.
+ * @param bool $full
+ *   Whether to retrieve all details (TRUE) or name and ID only (FALSE).
+ * @param array $options (optional)
+ *   Certain options may be passed to filter the list of flavors.
+ *   - minDisk: (optional) The minimum amount of on-instance disk storage (GB).
+ *   - minRam: (optional) The minimum amount of RAM (MB).
+ *   - marker: (optional) The ID of the last item in the previous list.
+ *   - limit: (optional) Sets the page size.
+ *
+ * @return array
+ *   An array of available flavors.
+ */
+function opencloud_get_flavors($compute, $full = TRUE, $options = array()) {
+  $return = array();
+
+  $flavors = $compute->FlavorList();
+  while ($flavor = $flavors->Next()) {
+    $return[$flavor->name]['ram'] = $flavor->ram;
+    $return[$flavor->name['disk'] = $flavor->disk;
+  }
+
+  return $return;
+}
+
+/**
+ * Get a list of available images.
+ *
+ * @param obj $compute
+ *   An Openstack compute connection.
+ * @param bool $full
+ *   Whether to retrieve all details (TRUE) or name and ID only (FALSE).
+ * @param array $options (optional)
+ *   Certain options may be passed to filter the list of flavors.
+ *   - name: (optional) The name of the image to list.
+ *
+ * @return array
+ *   An array of available images.
+ */
+function opencloud_get_images($compute, $full = TRUE, $options = array()) {
+  $return = array();
+
+  $images = $compute->ImageList($full, $options);
+  while ($image = $images->Next()) {
+    $return[$image->id]['name'] = $image->name;
+  }
+
+  return $return;
+}
