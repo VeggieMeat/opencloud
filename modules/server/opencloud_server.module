@@ -419,3 +419,17 @@ function opencloud_get_images($compute, $full = TRUE, $options = array()) {
 
   return $return;
 }
+
+/**
+ * Reboot a server.
+ *
+ * @param obj $server
+ *   An Openstack server object.
+ * @param bool $hard
+ *   Whether to issue a hard reboot if available.
+ */
+function opencloud_reboot_server($server, $hard = FALSE) {
+  $server->Reboot();
+  // @TODO Add check for what provider we are using so we can provide the right
+  // constant for a hard or soft reboot.
+}
