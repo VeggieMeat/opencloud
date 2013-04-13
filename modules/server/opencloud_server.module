@@ -388,11 +388,27 @@ function opencloud_get_flavors($compute, $full = TRUE, $options = array()) {
 
   $flavors = $compute->FlavorList();
   while ($flavor = $flavors->Next()) {
-    $return[$flavor->name]['ram'] = $flavor->ram;
-    $return[$flavor->name['disk'] = $flavor->disk;
+    $return[$flavor->id]['name'] = $flavor->name;
+    $return[$flavor->id]['ram'] = $flavor->ram;
+    $return[$flavor->id]['disk'] = $flavor->disk;
   }
 
   return $return;
+}
+
+/**
+ * Get an Openstack flavor object.
+ *
+ * @param obj $compute
+ *   An Openstack compute connection.
+ * @param string $id
+ *   The ID of the flavor to retrive.
+ *
+ * @return obj
+ *   An Openstack flavor object.
+ */
+function opencloud_get_flavor($compute, $id) {
+  return $compute->Flavor($id);
 }
 
 /**
@@ -432,4 +448,16 @@ function opencloud_reboot_server($server, $hard = FALSE) {
   $server->Reboot();
   // @TODO Add check for what provider we are using so we can provide the right
   // constant for a hard or soft reboot.
+}
+
+/**
+ * Resize a server.
+ *
+ * @param obj $server
+ *   An Openstack server object.
+ * @param obj $flavor
+ *   An Openstack flavor object.
+ */
+function opencloud_resize_server($server, $flavor) {
+  $server->Resize($flavor);
 }
