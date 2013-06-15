@@ -4,3 +4,6 @@ package = Opencloud
 core = 7.x
 
 dependencies[] = libraries
+dependencies[] = ctools
+dependencies[] = views
+dependencies[] = xautoload
