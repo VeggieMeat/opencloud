@@ -17,6 +17,16 @@ function opencloud_server_views_data() {
     'help' => t('Queries an Openstack-based server.'),
     'query class' => 'opencloud_server',
   );
+
+  $data['opencloud_server']['id'] = array(
+    'title' => t('Remote ID'),
+    'help' => t('The remote ID of the server.'),
+    'field' => array(
+      'handler' => 'opencloud_server_handler_field',
+    ),
+  );
+
+  return $data;
 }
 
 /**
