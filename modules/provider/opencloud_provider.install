@@ -50,6 +50,12 @@ function opencloud_provider_schema() {
         'length' => 255,
         'not null' => TRUE,
       ),
+      'uid' => array(
+        'description' => 'The {users}.uid that created this provider.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 1,
+      ),
       'created' => array(
         'description' => 'The Unix timestamp when the provider was created.',
         'type' => 'int',
@@ -64,6 +70,15 @@ function opencloud_provider_schema() {
       ),
     ),
     'primary key' => array('provider_id'),
+    'indexes' => array(
+      'uid' => array('uid'),
+    ),
+    'foreign keys' => array(
+      'creator' => array(
+        'table' => 'users',
+        'columns' => array('uid' => 'uid'),
+      ),
+    ),
   );
 
   return $schema;
