@@ -4,3 +4,5 @@ package = Opencloud
 core = 7.x
 
 dependencies[] = opencloud_provider
+
+files[] = includes/views/plugins/opencloud_server_plugin_query.inc
