@@ -8,7 +8,7 @@
 /**
  * The Opencloud plugin URI.
  */
-define('OPENCLOUD_DOWNLOAD_URI', 'https://github.com/rackspace/php-opencloud/archive/v1.4.1.tar.gz');
+define('OPENCLOUD_DOWNLOAD_URI', 'https://github.com/rackspace/php-opencloud/archive/v1.5.7.tar.gz');
 define('OPENCLOUD_DOWNLOAD_PREFIX', 'php-opencloud-');
 
 /**
