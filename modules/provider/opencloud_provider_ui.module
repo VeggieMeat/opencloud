@@ -14,11 +14,20 @@ function opencloud_provider_ui_menu() {
 
   $items['admin/opencloud/providers'] = array(
     'title' => 'Providers',
-    'description' => 'Manage OpenStack-based service providers',
+    'description' => 'Manage Openstack-based service providers',
     'page callback' => 'system_admin_menu_block_page',
     'access arguments' => array('access administration pages'),
     'file path' => drupal_get_path('module', 'system'),
     'file' => 'system.admin.inc',
+  );
+
+  $items['admin/opencloud/providers/add'] = array(
+    'title' => 'Add a new Provider',
+    'description' => 'Add a new Openstack-based service provider to access.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('opencloud_provider_ui_settings'),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_NORMAL_ITEM,
   );
 
   return $items;
