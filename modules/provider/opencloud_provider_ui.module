@@ -28,6 +28,7 @@ function opencloud_provider_ui_menu() {
     'page arguments' => array('opencloud_provider_ui_settings'),
     'access arguments' => array('access administration pages'),
     'type' => MENU_NORMAL_ITEM,
+    'file' => drupal_get_path('module', 'opencloud_provider_ui') . '/includes/opencloud_provider_ui.admin.inc',
   );
 
   return $items;
