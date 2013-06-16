@@ -50,6 +50,11 @@ function opencloud_provider_schema() {
         'length' => 255,
         'not null' => TRUE,
       ),
+      'tenant_id' => array(
+        'description' => 'The tenant ID used for this provider.',
+        'type' => 'bigint',
+        'not null' => TRUE,
+      ),
       'uid' => array(
         'description' => 'The {users}.uid that created this provider.',
         'type' => 'int',
@@ -71,6 +76,7 @@ function opencloud_provider_schema() {
     ),
     'primary key' => array('provider_id'),
     'indexes' => array(
+      'tenant_id' => array('tenant_id'),
       'uid' => array('uid'),
     ),
     'foreign keys' => array(
