@@ -18,6 +18,12 @@ function opencloud_server_views_data() {
     'query class' => 'opencloud_server',
   );
 
+  // We need the tenant ID from the provider.
+  $data['opencloud_server']['table']['join']['opencloud_provider'] = array(
+    'left_field' => 'tenant_id',
+    'field' => 'tenant_id',
+  );
+
   $data['opencloud_server']['id'] = array(
     'title' => t('Remote ID'),
     'help' => t('The remote ID of the server.'),
@@ -55,6 +61,22 @@ function opencloud_server_views_data() {
     'help' => t('The remote Tenant ID of the server.'),
     'field' => array(
       'handler' => 'opencloud_server_views_handler_field',
+    ),
+    'relationship' => array(
+      'handler' => 'views_handler_relationship',
+      'base' => 'opencloud_provider',
+      'base field' => 'tenant_id',
+      'label' => t('Provider', array(), array('context' => 'an opencloud provider')),
+      'title' => t('Provider', array(), array('context' => 'an opencloud provider')),
+   ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_string',
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_string',
     ),
   );
 
