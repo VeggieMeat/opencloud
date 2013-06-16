@@ -1,6 +1,6 @@
 <?php
 
-class opencloud_server_handler_field extends views_handler_field {
+class opencloud_server_views_handler_field extends views_handler_field {
 
   function query() {
     $this->add_additional_fields();

@@ -22,7 +22,7 @@ function opencloud_server_views_data() {
     'title' => t('Remote ID'),
     'help' => t('The remote ID of the server.'),
     'field' => array(
-      'handler' => 'opencloud_server_handler_field',
+      'handler' => 'opencloud_server_views_handler_field',
     ),
   );
 
@@ -30,7 +30,7 @@ function opencloud_server_views_data() {
     'title' => t('Host'),
     'help' => t('The host node where the server resides.'),
     'field' => array(
-      'handler' => 'opencloud_server_handler_field',
+      'handler' => 'opencloud_server_views_handler_field',
     ),
   );
 
@@ -38,7 +38,7 @@ function opencloud_server_views_data() {
     'title' => t('UUID'),
     'help' => t('The remote UUID of the server (not used by all providers).'),
     'field' => array(
-      'handler' => 'opencloud_server_handler_field',
+      'handler' => 'opencloud_server_views_handler_field',
     ),
   );
 
@@ -46,7 +46,7 @@ function opencloud_server_views_data() {
     'title' => t('User ID'),
     'help' => t('The remote User ID of the server.'),
     'field' => array(
-      'handler' => 'opencloud_server_handler_field',
+      'handler' => 'opencloud_server_views_handler_field',
     ),
   );
 
@@ -54,7 +54,7 @@ function opencloud_server_views_data() {
     'title' => t('Tenant ID'),
     'help' => t('The remote Tenant ID of the server.'),
     'field' => array(
-      'handler' => 'opencloud_server_handler_field',
+      'handler' => 'opencloud_server_views_handler_field',
     ),
   );
 
@@ -62,7 +62,7 @@ function opencloud_server_views_data() {
     'title' => t('Name'),
     'help' => t('The name of the server.'),
     'field' => array(
-      'handler' => 'opencloud_server_handler_field',
+      'handler' => 'opencloud_server_views_handler_field',
     ),
   );
 
@@ -70,7 +70,7 @@ function opencloud_server_views_data() {
     'title' => t('Status'),
     'help' => t('The status of the server.'),
     'field' => array(
-      'handler' => 'opencloud_server_handler_field',
+      'handler' => 'opencloud_server_views_handler_field',
     ),
   );
 
@@ -78,7 +78,7 @@ function opencloud_server_views_data() {
     'title' => t('Progress'),
     'help' => t('The progress of the server in the current state.'),
     'field' => array(
-      'handler' => 'opencloud_server_handler_field',
+      'handler' => 'opencloud_server_views_handler_field',
     ),
   );
 
@@ -86,7 +86,7 @@ function opencloud_server_views_data() {
     'title' => t('IPv4'),
     'help' => t('The publicly accessible IPv4 address (not used by some providers).'),
     'field' => array(
-      'handler' => 'opencloud_server_handler_field',
+      'handler' => 'opencloud_server_views_handler_field',
     ),
   );
 
@@ -94,7 +94,7 @@ function opencloud_server_views_data() {
     'title' => t('IPv6'),
     'help' => t('The publicly accessible IPv6 address (not used by some providers).'),
     'field' => array(
-      'handler' => 'opencloud_server_handler_field',
+      'handler' => 'opencloud_server_views_handler_field',
     ),
   );
 
@@ -102,7 +102,7 @@ function opencloud_server_views_data() {
     'title' => t('Created'),
     'help' => t('The date and time when the server was created.'),
     'field' => array(
-      'handler' => 'opencloud_server_handler_field',
+      'handler' => 'opencloud_server_views_handler_field',
     ),
   );
 
@@ -110,7 +110,7 @@ function opencloud_server_views_data() {
     'title' => t('Updated'),
     'help' => t('The date and time when the server was most recently updated.'),
     'field' => array(
-      'handler' => 'opencloud_server_handler_field',
+      'handler' => 'opencloud_server_views_handler_field',
     ),
   );
   return $data;
@@ -125,7 +125,7 @@ function opencloud_server_views_plugins() {
       'opencloud_server' => array(
         'title' => t('Opencloud Server Query'),
         'help' => t('Query will be generated and run against an Openstack-based Compute endpoint.'),
-        'handler' => 'opencloud_server_plugin_query',
+        'handler' => 'opencloud_server_views_plugin_query',
       ),
     ),
   );
