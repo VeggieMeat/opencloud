@@ -111,6 +111,23 @@ function opencloud_provider_views_data() {
       'handler' => 'views_handler_argument_string',
     ),
   );
+  $data['opencloud_provider']['tenant_id'] = array(
+    'title' => t('Tenant ID'),
+    'help' => t('The tenant ID used with this provider.'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+      'click sortable' => TRUE,
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_string',
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_string',
+    ),
+  );
   // Expose the Provider Region.
   $data['opencloud_provider']['region'] = array(
     'title' => t('Provider Region'),
