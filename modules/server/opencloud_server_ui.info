@@ -1,0 +1,7 @@
+name = Opencloud Server UI
+description = UI for managing Openstack servers
+package = Opencloud
+core = 7.x
+
+dependencies[] = opencloud_server
+dependencies[] = opencloud_ui
