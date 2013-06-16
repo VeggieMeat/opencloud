@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Defines UI items Opencloud Server.
+ */
+
+
+/**
+ * Implements hook_menu().
+ */
+function opencloud_server_ui_menu() {
+  $items = array();
+
+  $items['admin/opencloud/servers'] = array(
+    'title' => 'Servers',
+    'description' => 'Administer Openstack-based servers.',
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access administration pages'),
+    'file path' => drupal_get_path('module', 'system'),
+    'file' => 'system.admin.inc',
+  );
+
+  return $items;
+}
