@@ -195,6 +195,20 @@ function opencloud_provider_load($provider_id) {
 }
 
 /**
+ * Load a Provider by Tenant ID.
+ *
+ * @param int $tenant_id
+ *   The ID of the Provider to load.
+ *
+ * @return obj
+ *   The provider object.
+ */
+function opencloud_provider_load_by_tenant_id($tenant_id) {
+  $entities = entity_load('opencloud_provider', FALSE, array('tenant_id' => $tenant_id));
+  return reset($entities);
+}
+
+/**
  * Save a Provider.
  *
  * @param obj $provider
