@@ -1,0 +1,7 @@
+name = Opencloud Provider UI
+description = UI for managing Openstack providers
+package = Opencloud
+core = 7.x
+
+dependencies[] = opencloud_provider
+dependencies[] = opencloud_ui
