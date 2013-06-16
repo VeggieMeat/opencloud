@@ -1,5 +1,5 @@
 name = Opencloud
-description = Allows Openstack deployments to be managed by Drupal
+description = Integrate the PHP-Opencloud SDK with Drupal
 package = Opencloud
 core = 7.x
 
