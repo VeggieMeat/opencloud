@@ -5,3 +5,4 @@ core = 7.x
 
 dependencies[] = opencloud_server
 dependencies[] = opencloud_ui
+dependencies[] = views
