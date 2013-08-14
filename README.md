@@ -4,8 +4,8 @@ Opencloud
 Drupal module to manage Openstack-based cloud services using Rackspace's
 [php-opencloud](https://github.com/rackspace/php-opencloud)
 
-*THIS IS CURRENTLY UNDER ACTIVE DEVELOPMENT AND SHOULD ABSOLUTE NOT BE USED
-IN PRODUCTION ENVIRONMENTS*
+**THIS IS CURRENTLY UNDER ACTIVE DEVELOPMENT AND SHOULD ABSOLUTELY NOT BE USED
+IN PRODUCTION ENVIRONMENTS**
 
 
 Dependencies
