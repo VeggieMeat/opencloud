@@ -63,6 +63,13 @@ function opencloud_provider_entity_property_info() {
     'required' => TRUE,
     'schema field' => 'url',
   );
+  $properties['type'] = array(
+    'label' => t('Openstack provider type'),
+    'description' => t('This affects the base class that is used for the API.'),
+    'setter callback' => 'entity_property_verbaim_set',
+    'require' => TRUE,
+    'schema field' => 'type',
+  );
   $properties['region'] = array(
     'label' => t('Region'),
     'description' => t('The region these credentials apply to.'),
@@ -70,7 +77,7 @@ function opencloud_provider_entity_property_info() {
     'required' => TRUE,
     'schema field' => 'region',
   );
- $properties['username'] = array(
+  $properties['username'] = array(
     'label' => t('Username'),
     'description' => t('The username for the provider.'),
     'setter callback' => 'entity_property_verbatim_set',

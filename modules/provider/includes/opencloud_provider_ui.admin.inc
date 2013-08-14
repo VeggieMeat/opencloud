@@ -25,6 +25,14 @@ function opencloud_provider_ui_settings() {
     '#required' => TRUE,
   );
 
+  $form['type' = array(
+    '#type' => 'select',
+    '#title' => t('Type'),
+    '#description' => t('This chooses which class in the API to use with this Provider.'),
+    '#options' => opencloud_provider_ui_get_type_options(),
+    '#required' => TRUE,
+  );
+
   $form['region'] = array(
     '#type' => 'textfield',
     '#title' => t('Region'),
@@ -53,5 +61,40 @@ function opencloud_provider_ui_settings() {
     '#required' => TRUE,
   );
 
-  return system_settings_form($form);
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save provider'),
+    '#submit' => array('opencloud_provider_ui_provider_form_submit'),
+  );
+
+  return $form;
+}
+
+/**
+ * Submit handler for Provider form.
+ */
+function opencloud_provider_ui_provider_form_submit($form, &$form_state) {
+  foreach ($form_state['values'] as $field => $value) {
+    $provider->$field = $value;
+  }
+
+  if (empty($provider->uid)) {
+    $provider->uid = $user->uid;
+  }
+
+  opencloud_provider_save($provider);
+}
+
+/**
+ * Get an array of options for type settings.
+ */
+function opencloud_provider_ui_get_type_options() {
+  $options = array();
+
+  $types = opencloud_provider_get_types();
+  foreach ($types as $class => $description) {
+    $options[$class] = $class;
+  }
+
+  return $options;
 }
