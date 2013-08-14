@@ -13,7 +13,6 @@ function opencloud_provider_ui_menu() {
   $items = array();
 
   // Note: admin/opencloud/providers is defined by a default View.
-
   $items['admin/opencloud/providers/add'] = array(
     'title' => 'Add a new Provider',
     'description' => 'Add a new Openstack-based service provider to access.',

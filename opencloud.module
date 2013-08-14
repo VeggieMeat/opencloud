@@ -5,7 +5,7 @@
  * Allows Openstack deployments to be managed through Drupal.
  */
 
-require_once('sites/all/vendor/autoload.php');
+require_once 'sites/all/vendor/autoload.php';
 
 /**
  * Generic access control for Opencloud entities.
@@ -26,7 +26,7 @@ require_once('sites/all/vendor/autoload.php');
  * @return bool
  *   Whether or not the user can access the entity.
  */
-function opencloud_entity_access($op, $entity = NULL, $account = NULL, $entity_type) {
+function opencloud_entity_access($op, $entity_type, $entity = NULL, $account = NULL) {
   global $user;
   $account = isset($account) ? $account : $user;
 
@@ -57,23 +57,23 @@ function opencloud_entity_access_permissions($entity_type) {
 
   $permissions = array();
 
-  // 'administer' permission
+  // 'administer' permission.
   $permissions['administer ' . $entity_type . 'entities'] = array(
     'title' => t('Administer @entity_type', array('@entity_type' => $entity_info['plural label'])),
   );
-  // 'create' permission
+  // 'create' permission.
   $permissions['create ' . $entity_type . 'entities'] = array(
     'title' => t('Create @entity_type', array('@entity_type' => $entity_info['plural label'])),
   );
-  // 'view' permission
+  // 'view' permission.
   $permissions['view ' . $entity_type . 'entities'] = array(
     'title' => t('View @entity_type', array('@entity_type' => $entity_info['plural label'])),
   );
-  // 'edit' permission
+  // 'edit' permission.
   $permissions['edit ' . $entity_type . 'entities'] = array(
     'title' => t('Edit @entity_type', array('@entity_type' => $entity_info['plural label'])),
   );
-  // 'delete' permission
+  // 'delete' permission.
   $permissions['delete ' . $entity_type . 'entities'] = array(
     'title' => t('Delete @entity_type', array('@entity_type' => $entity_info['plural label'])),
   );

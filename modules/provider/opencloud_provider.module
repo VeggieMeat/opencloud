@@ -118,7 +118,7 @@ function opencloud_provider_field_extra_fields() {
         'description' => t('The region form element.'),
         'weight' => 0,
       ),
-     'username' => array(
+      'username' => array(
         'label' => t('Username'),
         'description' => t('The username form element.'),
         'weight' => 0,
@@ -234,7 +234,7 @@ function opencloud_provider_load_by_tenant_id($tenant_id) {
  * @param obj $provider
  *   The Provider to save.
  *
- * @return
+ * @return int
  *   SAVED_NEW or SAVED_UPDATED or FALSE
  */
 function opencloud_provider_save($provider) {
@@ -247,7 +247,7 @@ function opencloud_provider_save($provider) {
  * @param int $provider_id
  *   The ID of the Provider to delete.
  *
- * @return
+ * @return bool
  *   FALSE if no information was available on how to delete the Provider.
  */
 function opencloud_provider_delete($provider_id) {
@@ -268,7 +268,7 @@ function opencloud_provider_delete($provider_id) {
  *   Whether or not the user has access to this provider.
  */
 function opencloud_provider_access($op, $provider = NULL, $account = NULL) {
-  return opencloud_access($op, $provider, $account, 'opencloud_provider');
+  return opencloud_access($op, 'opencloud_provider', $provider, $account);
 }
 
 /**

@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @file
  * Expose Opencloud provider data to Views
  */
 
