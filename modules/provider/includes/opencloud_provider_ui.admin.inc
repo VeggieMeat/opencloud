@@ -74,6 +74,8 @@ function opencloud_provider_ui_settings() {
  * Submit handler for Provider form.
  */
 function opencloud_provider_ui_provider_form_submit($form, &$form_state) {
+  global $user;
+
   foreach ($form_state['values'] as $field => $value) {
     $provider->$field = $value;
   }
