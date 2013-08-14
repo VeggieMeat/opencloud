@@ -26,6 +26,12 @@ function opencloud_provider_schema() {
         'length' => 255,
         'not null' => TRUE,
       ),
+      'type' => array(
+        'description' => 'The type of provider. This affects the base class that is used for the API.',
+        'type' => 'varchar',
+        'length' => 255,
+        'non null' => TRUE,
+      ),
       'url' => array(
         'description' => 'The authentication URL for this provider.',
         'type' => 'varchar',

@@ -172,6 +172,19 @@ function opencloud_provider_views_api() {
 }
 
 /**
+ * Returns an array of acceptable provider types.
+ *
+ * Keys are the names of the class to be used.
+ * Values are the description.
+ */
+function opencloud_provider_get_types() {
+  return array(
+    'OpenStack' => t('Any other Openstack-based provider'),
+    'Rackspace' => t('Rackspace Cloud'),
+  );
+}
+
+/**
  * Create a Provider.
  *
  * @return obj
@@ -261,21 +274,8 @@ function opencloud_provider_access($op, $provider = NULL, $account = NULL) {
  *   An OpenStack connection to the Provider's service.
  */
 function opencloud_provider_connect($provider) {
-  // Load the OpenCloud library. This point makes sense because it will always
-  // have to be loaded here.
-  opencloud_load_library();
-
-  // Some providers like Rackspace have special implementations of the API.
-  if (class_exists("OpenCloud\\{$provider->name}")) {
-    $class = "OpenCloud\\{$provider->name}";
-  }
-  else {
-    // Use the generic OpenStack class.
-    $class = 'OpenCloud\OpenStack';
-  }
-
   // Setup our credentials array.
-  if ('Rackspace' == $provider->name) {
+  if ('Rackspace' == $provider->type) {
     $credentials = array(
       'username' => $provider->username,
       'apiKey' => $provider->password,
@@ -288,11 +288,13 @@ function opencloud_provider_connect($provider) {
     );
   }
 
+  $class = 'OpenCloud\\' . $provider->type;
+
   // Create a new connection object.
   $cloud = new $class($provider->url, $credentials);
 
   // Set some default constants that deviate from normal.
-  if ('Rackspace' == $provider->name) {
+  if ('Rackspace' == $provider->type) {
     $cloud->SetDefaults('Compute', 'cloudServersOpenStack', $provider->region);
   }
 
