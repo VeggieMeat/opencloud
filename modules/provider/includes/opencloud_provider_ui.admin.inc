@@ -28,7 +28,7 @@ function opencloud_provider_ui_settings() {
   $form['type'] = array(
     '#type' => 'select',
     '#title' => t('Type'),
-    '#description' => t('This chooses which class in the API to use with this Provider.'),
+    '#description' => t('This chooses which class in the API to use with this Provider. If your provider is not listed by name, then choose OpenStack.'),
     '#options' => opencloud_provider_ui_get_type_options(),
     '#required' => TRUE,
   );
