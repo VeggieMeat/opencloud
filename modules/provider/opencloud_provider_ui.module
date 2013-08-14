@@ -12,14 +12,7 @@
 function opencloud_provider_ui_menu() {
   $items = array();
 
-  $items['admin/opencloud/providers'] = array(
-    'title' => 'Providers',
-    'description' => 'Manage Openstack-based service providers',
-    'page callback' => 'system_admin_menu_block_page',
-    'access arguments' => array('access administration pages'),
-    'file path' => drupal_get_path('module', 'system'),
-    'file' => 'system.admin.inc',
-  );
+  // Note: admin/opencloud/providers is defined by a default View.
 
   $items['admin/opencloud/providers/add'] = array(
     'title' => 'Add a new Provider',
@@ -27,7 +20,6 @@ function opencloud_provider_ui_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('opencloud_provider_ui_settings'),
     'access arguments' => array('access administration pages'),
-    'type' => MENU_NORMAL_ITEM,
     'file' => 'includes/opencloud_provider_ui.admin.inc',
   );
 
