@@ -18,7 +18,7 @@ function opencloud_provider_ui_menu() {
     'description' => 'Add a new Openstack-based service provider to access.',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('opencloud_provider_ui_settings'),
-    'access arguments' => array('access administration pages'),
+    'access arguments' => array('create opencloud_provider entities'),
     'file' => 'includes/opencloud_provider_ui.admin.inc',
   );
 
