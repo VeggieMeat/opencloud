@@ -3,4 +3,4 @@ description = Integrate the PHP-Opencloud SDK with Drupal
 package = Opencloud
 core = 7.x
 
-dependencies[] = libraries
+dependencies[] = composer_manager
