@@ -57,6 +57,26 @@ function opencloud_provider_views_data() {
       'handler' => 'views_handler_argument_string',
     ),
   );
+
+  // Expose the Provider Type.
+  $data['opencloud_provider']['type'] = array(
+    'title' => t('Provider Type'),
+    'help' => t('The type of the provider.'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+      'click sortable' => TRUE,
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_string',
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_string',
+    ),
+  );
+
   // Expose the Provider authentication URL.
   $data['opencloud_provider']['url'] = array(
     'title' => t('Provider URL'),
