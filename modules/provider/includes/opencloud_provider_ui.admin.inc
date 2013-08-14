@@ -25,7 +25,7 @@ function opencloud_provider_ui_settings() {
     '#required' => TRUE,
   );
 
-  $form['type' = array(
+  $form['type'] = array(
     '#type' => 'select',
     '#title' => t('Type'),
     '#description' => t('This chooses which class in the API to use with this Provider.'),
