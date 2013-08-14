@@ -5,7 +5,7 @@
  * Allows Openstack deployments to be managed through Drupal.
  */
 
-require_once('sites/all/vendors/autoload.php');
+require_once('sites/all/vendor/autoload.php');
 
 /**
  * Generic access control for Opencloud entities.
