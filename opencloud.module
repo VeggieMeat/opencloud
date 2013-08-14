@@ -16,12 +16,12 @@ require_once 'sites/all/vendor/autoload.php';
  *   - view: The entity is being viewed.
  *   - update: The entity is being updated.
  *   - delete: The entity is being deleted.
+ * @param string $entity_type
+ *   The entity type to check access for.
  * @param obj $entity
  *   (optional) The entity to check access for.
  * @param obj $account
  *   (optional) The account to check access for.
- * @param string $entity_type
- *   The entity type to check access for.
  *
  * @return bool
  *   Whether or not the user can access the entity.
