@@ -1,0 +1,6 @@
+name = Opencloud Provider (Rackspace)
+description = Provides ability to use Opencloud with the Rackspace Cloud
+package = Opencloud
+core = 7.x
+
+dependencies[] = opencloud_provider
