@@ -30,3 +30,10 @@ function hook_opencloud_provider_credentials($provider) {
     );
   }
 }
+
+/**
+ * Allows modules to alter available Provider types.
+ */
+function hook_opencloud_provider_types_alter(&$types) {
+  $types['Rackspace'] = 'Rackspace Cloud',
+}

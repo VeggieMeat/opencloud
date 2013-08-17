@@ -184,11 +184,15 @@ function opencloud_provider_views_api() {
  * Keys are the names of the class to be used.
  * Values are the description.
  */
-function opencloud_provider_get_types() {
-  return array(
+function opencloud_provider_types() {
+  $types = array(
     'OpenStack' => t('Any other Openstack-based provider'),
-    'Rackspace' => t('Rackspace Cloud'),
   );
+
+  // Provide a hook to allow other modules to define their own types.
+  drupal_alter('opencloud_provider_types', $types);
+
+  return $types;
 }
 
 /**

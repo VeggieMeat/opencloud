@@ -93,7 +93,7 @@ function opencloud_provider_ui_provider_form_submit($form, &$form_state) {
 function opencloud_provider_ui_get_type_options() {
   $options = array();
 
-  $types = opencloud_provider_get_types();
+  $types = opencloud_provider_types();
   foreach ($types as $class => $description) {
     $options[$class] = $class;
   }
