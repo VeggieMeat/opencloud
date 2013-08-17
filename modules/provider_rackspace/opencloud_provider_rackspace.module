@@ -23,3 +23,12 @@ function opencloud_provider_rackspace_opencloud_provider_credentials($provider) 
     );
   }
 }
+
+/**
+ * Implements hook_opencloud_provider_connection_alter().
+ */
+function opencloud_provider_rackspace_opencloud_provider_connection_alter($connection) {
+  if ('Rackspace' == $provider->type) {
+    $connection->SetDefaults('Compute', 'cloudServersOpenStack', $provider->region);
+  }
+}

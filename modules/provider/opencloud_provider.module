@@ -294,10 +294,8 @@ function opencloud_provider_connect($provider) {
   // Create a new connection object.
   $connection = new $class($provider->url, $credentials);
 
-  // Set some default constants that deviate from normal.
-  if ('Rackspace' == $provider->type) {
-    $connection->SetDefaults('Compute', 'cloudServersOpenStack', $provider->region);
-  }
+  // Let other provider modules alter the connection.
+  drupal_alter('opencloud_provider_connection', $connection);
 
   return $connection;
 }

@@ -35,5 +35,14 @@ function hook_opencloud_provider_credentials($provider) {
  * Allows modules to alter available Provider types.
  */
 function hook_opencloud_provider_types_alter(&$types) {
-  $types['Rackspace'] = 'Rackspace Cloud',
+  $types['Rackspace'] = 'Rackspace Cloud';
+}
+
+/**
+ * Allows modules to alter Provider connections.
+ */
+function hook_opencloud_provider_connection_alter($connection) {
+  if ('Rackspace' == $provider->type) {
+    $connection->SetDefaults('Compute', 'cloudServersOpenStack', $provider->region);
+  }
 }
