@@ -282,19 +282,9 @@ function opencloud_provider_access($op, $provider = NULL, $account = NULL) {
  */
 function opencloud_provider_connect($provider) {
   // Setup our credentials array.
-  if ('Rackspace' == $provider->type) {
-    $credentials = array(
-      'username' => $provider->username,
-      'apiKey' => $provider->password,
-    );
-  }
-  else {
-    $credentials = array(
-      'username' => $provider->username,
-      'password' => $provider->password,
-    );
-  }
+  $credentials = opencloud_provider_credentials($provider);
 
+  // Determine the class that we should use to make the connection.
   $class = 'OpenCloud\\' . $provider->type;
 
   // Create a new connection object.
@@ -306,4 +296,27 @@ function opencloud_provider_connect($provider) {
   }
 
   return $connection;
+}
+
+/**
+ * Build a credentials array for making a connection.
+ *
+ * @param obj $provider
+ *   The Provider to use for credentials.
+ *
+ * @return array
+ *   An array of credentials to use.
+ */
+function opencloud_provider_credentials($provider) {
+  // Provide a hook so that other modules can provide their own credentials.
+  $credentials = module_invoke_all('opencloud_provider_credentials', $provider);
+
+  if (!isset($credentials) || empty($credentials)) {
+    $credentials = array(
+      'username' => $provider->username,
+      'password' => $provider->password,
+    );
+  }
+
+  return $credentials;
 }
