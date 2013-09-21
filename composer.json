@@ -1,6 +1,6 @@
 {
   "name": "drupal/opencloud",
-  "type": "drupal-moodule",
+  "type": "drupal-module",
   "description": "Integrate the PHP-Opencloud SDK with Drupal",
   "homepage": "https://drupal.org/sandbox/BrianAltenhofel/1812142",
   "license": "GPL-2.0",
