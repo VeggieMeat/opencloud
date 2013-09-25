@@ -137,18 +137,3 @@ function opencloud_server_views_data() {
   );
   return $data;
 }
-
-/**
- * Implements hook_views_plugins().
- */
-function opencloud_server_views_plugins() {
-  return array(
-    'query' => array(
-      'opencloud_server' => array(
-        'title' => t('Opencloud Server Query'),
-        'help' => t('Query will be generated and run against an Openstack-based Compute endpoint.'),
-        'handler' => 'opencloud_server_views_plugin_query',
-      ),
-    ),
-  );
-}
