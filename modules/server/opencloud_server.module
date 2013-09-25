@@ -18,7 +18,7 @@ function opencloud_server_entity_info() {
       'base table' => 'opencloud_server',
       'fieldable' => TRUE,
       'entity keys' => array(
-        'id' = 'server_id',
+        'id' => 'server_id',
         'bundle' => 'provider_id',
         'label' => 'name',
       ),
@@ -312,19 +312,44 @@ function opencloud_server_import_all_servers($provider_id) {
   $servers = opencloud_server_fetch_all_servers($provider_id);
 
   foreach ($servers as $server) {
-    $values = array(
-      'name' => $server->name,
-      'provider_id' => $provider_id,
-      'status' => $server->status,
-      'uuid' => $server->id,
-      'hostid' => $server->hostId,
-      'image' => $server->image->id,
-      'flavor' => $server->flavor->id,
-      'addresses' => json_encode($server->addresses),
-    );
+    $values = opencloud_server_map_properties($server, $provider_id);
     $entity = opencloud_server_create($values);
     opencloud_server_save($entity);
   }
+}
+
+/**
+ * Map remote properties to local properties.
+ *
+ * @param obj $server
+ *   The Openstack server object.
+ * @param int $provider_id
+ *   The provider for this server.
+ *
+ * @return array
+ *   An array of properties.
+ */
+function opencloud_server_map_properties($server, $provider_id) {
+  $properties = entity_get_property_info('opencloud_server');
+
+  $properties['name'] = $server->name;
+  $properties['provider_id'] = $provider_id;
+  $properties['status'] = $server->status;
+  $properties['uuid'] = $server->id;
+  $properties['hostid'] = $server->hostId;
+  $properties['image'] = $server->image->id;
+  $properties['flavor'] = $server->flavor->id;
+  $properties['addresses'] = json_encode($server->addresses);
+
+  // Allow other modules to provide mappings for their properties.
+  $provider = opencloud_provider_load($provider_id);
+  $context = array(
+    'server' => clone $server,
+    'provider' => clone $provider,
+  );
+  drupal_alter('opencloud_server_map_properties', $properties, $context);
+
+  return $array;
 }
 
 /**
