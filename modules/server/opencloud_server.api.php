@@ -14,6 +14,8 @@
  * mappings common across most Openstack providers. However, some providers
  * implement their own properties for their deployments.
  *
+ * Remember to define these properties with hook_entity_property_info_alter().
+ *
  * @param array $properties
  *   A property mapping array.
  * @param array $context
