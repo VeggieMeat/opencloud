@@ -290,6 +290,9 @@ function opencloud_provider_connect($provider) {
 
   // Determine the class that we should use to make the connection.
   $class = 'OpenCloud\\' . $provider->type;
+  if (!class_exists($class)) {
+    $class = 'OpenCloud\OpenStack';
+  }
 
   // Create a new connection object.
   $connection = new $class($provider->url, $credentials);
