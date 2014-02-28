@@ -285,6 +285,10 @@ function opencloud_provider_access($op, $provider = NULL, $account = NULL) {
  *   An OpenStack connection to the Provider's service.
  */
 function opencloud_provider_connect($provider) {
+  if (!opencloud_loaded()) {
+    watchdog('opencloud', t('PHP-Opencloud library not loaded.'), array(), WATCHDOG_ERROR);
+    return FALSE;
+  }
   // Setup our credentials array.
   $credentials = opencloud_provider_credentials($provider);
 
