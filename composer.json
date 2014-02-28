@@ -8,6 +8,6 @@
     "issues": "https://drupal.org/project/issues/1812142"
   },
   "require": {
-    "rackspace/php-opencloud": "1.5.10"
+    "rackspace/php-opencloud": "1.9.2"
   }
 }
