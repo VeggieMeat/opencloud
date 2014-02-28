@@ -5,7 +5,21 @@
  * Allows Openstack deployments to be managed through Drupal.
  */
 
-require_once 'sites/all/vendor/autoload.php';
+/**
+ * Ensure that the php-opencloud library is loaded.
+ *
+ * @return bool
+ *   Returns TRUE if the library is loaded.
+ */
+function opencloud_loaded() {
+  $loaded = &drupal_static(__FUNCTION__);
+  if (!isset($loaded)) {
+    if (!class_exists('\OpenCloud\OpenStack') && module_exists('composer_manager')) {
+      composer_manager_register_autoload();
+      $loaded = class_exists('\OpenCloud\OpenStack');
+    }
+  }
+}
 
 /**
  * Generic access control for Opencloud entities.
