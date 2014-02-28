@@ -148,6 +148,7 @@ function opencloud_provider_ui_views_default_views() {
   $handler->display->display_options['tab_options']['title'] = 'Providers';
   $handler->display->display_options['tab_options']['description'] = 'Manage your available service providers';
   $handler->display->display_options['tab_options']['weight'] = '0';
+  $handler->display->display_options['tab_options']['name'] = 'management';
 
   $views[$view->name] = $view;
 
