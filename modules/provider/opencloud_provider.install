@@ -58,26 +58,24 @@ function opencloud_provider_schema() {
       ),
       'tenant_id' => array(
         'description' => 'The tenant ID used for this provider.',
-        'type' => 'bigint',
+        'type' => 'int',
+        'size' => 'big',
         'not null' => TRUE,
       ),
       'uid' => array(
         'description' => 'The {users}.uid that created this provider.',
         'type' => 'int',
         'not null' => TRUE,
-        'default' => 1,
       ),
       'created' => array(
         'description' => 'The Unix timestamp when the provider was created.',
         'type' => 'int',
         'not null' => TRUE,
-        'default' => 0,
       ),
       'updated' => array(
         'description' => 'The Unix timestamp when the provider was most recently updated.',
         'type' => 'int',
         'not null' => TRUE,
-        'default' => 0,
       ),
     ),
     'primary key' => array('provider_id'),
