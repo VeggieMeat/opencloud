@@ -84,6 +84,9 @@ function opencloud_provider_ui_provider_form_submit($form, &$form_state) {
     $provider->uid = $user->uid;
   }
 
+  $provider->created = REQUEST_TIME;
+  $provider->updated = REQUEST_TIME;
+
   opencloud_provider_save($provider);
 }
 
