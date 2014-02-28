@@ -45,47 +45,47 @@ function opencloud_provider_entity_property_info() {
   $properties = &$info['opencloud_provider']['properties'];
 
   $properties['provider_id'] = array(
-    'label' => t('Provider ID'),
+    //'label' => t('Provider ID'),
     'description' => t('The unique provider ID.'),
     'schema field' => 'provider_id',
   );
   $properties['name'] = array(
-    'label' => t('Name'),
+    //'label' => t('Name'),
     'description' => t('The name of the provider.'),
     'setter callback' => 'entity_property_verbatim_set',
     'required' => TRUE,
     'schema field' => 'name',
   );
   $properties['url'] = array(
-    'label' => t('Authentication URL'),
+    //'label' => t('Authentication URL'),
     'description' => t('The authentication URL for the provider.'),
     'setter callback' => 'entity_property_verbatim_set',
     'required' => TRUE,
     'schema field' => 'url',
   );
   $properties['type'] = array(
-    'label' => t('Openstack provider type'),
+    //'label' => t('Openstack provider type'),
     'description' => t('This affects the base class that is used for the API.'),
-    'setter callback' => 'entity_property_verbaim_set',
+    'setter callback' => 'entity_property_verbatim_set',
     'require' => TRUE,
     'schema field' => 'type',
   );
   $properties['region'] = array(
-    'label' => t('Region'),
+    //'label' => t('Region'),
     'description' => t('The region these credentials apply to.'),
     'setter callback' => 'entity_property_verbatim_set',
     'required' => TRUE,
     'schema field' => 'region',
   );
   $properties['username'] = array(
-    'label' => t('Username'),
+    //'label' => t('Username'),
     'description' => t('The username for the provider.'),
     'setter callback' => 'entity_property_verbatim_set',
     'required' => TRUE,
     'schema field' => 'username',
   );
   $properties['password'] = array(
-    'label' => t('Password'),
+    //'label' => t('Password'),
     'description' => t('The password or key for the provider.'),
     'setter callback' => 'entity_property_verbatim_set',
     'required' => TRUE,

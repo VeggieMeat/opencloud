@@ -39,3 +39,13 @@ function opencloud_provider_ui_menu_local_tasks_alter(&$data, $router_item, $roo
     }
   }
 }
+
+/**
+ * Implements hook_views_api().
+ */
+function opencloud_provider_ui_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'opencloud_provider_ui') . '/includes/views',
+  );
+}
