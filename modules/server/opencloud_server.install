@@ -60,6 +60,12 @@ function opencloud_server_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+      'expires' => array(
+        'description' => 'The Unix timestamp when the server should be refreshed.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
       'image' => array(
         'description' => 'The UUID of the image that was used to build this server.',
         'type' => 'varchar',
@@ -93,4 +99,11 @@ function opencloud_server_schema() {
   );
 
   return $schema;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function opencloud_server_uninstall() {
+  variable_del('opencloud_server_expiration');
 }

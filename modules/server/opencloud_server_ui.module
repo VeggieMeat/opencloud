@@ -21,5 +21,24 @@ function opencloud_server_ui_menu() {
     'file' => 'system.admin.inc',
   );
 
+  $items['admin/opencloud/servers/settings'] = array(
+    'title' => 'Settings',
+    'description' => 'Universal settings for servers.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('opencloud_server_ui_settings'),
+    'access arguments' => array('administer opencloud_server entites'),
+    'file' => 'includes/opencloud_server_ui.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  $items['admin/opencloud/providers/%opencloud_provider/import-servers'] = array(
+    'title' => 'Import Servers',
+    'description' => 'Import servers for this provider.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('opencloud_server_ui_import_form'),
+    'access arguments' => array('administer opencloud_server entities'),
+    'file' => 'includes/opencloud_server_ui.admin.inc',
+  );
+
   return $items;
 }
