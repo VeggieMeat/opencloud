@@ -39,56 +39,47 @@ function opencloud_server_entity_property_info() {
   $properties = &$info['opencloud_server']['properties'];
 
   $properties['server_id'] = array(
-    'label' => t('Server ID'),
     'description' => t('The unique server ID.'),
     'schema field' => 'server_id',
   );
   $properties['provider_id'] = array(
-    'label' => t('Provider ID'),
     'description' => t('The Provider this server belongs to.'),
     'setter callback' => 'entity_property_verbatim_set',
     'required' => TRUE,
     'schema field' => 'provider_id',
   );
   $properties['name'] = array(
-    'label' => t('Name'),
     'description' => t('The name of the server.'),
     'setter callback' => 'entity_property_verbatim_set',
     'required' => TRUE,
     'schema field' => 'name',
   );
   $properties['status'] = array(
-    'label' => t('Status'),
     'description' => t('The current status of this server.'),
     'setter callback' => 'entity_property_verbatim_set',
     'schema field' => 'status',
   );
   $properties['hostid'] = array(
-    'label' => t('Host ID'),
     'description' => t('The host that this server resides on.'),
     'setter callback' => 'entity_property_verbatim_set',
     'schema field' => 'hostid',
   );
   $properties['uuid'] = array(
-    'label' => t('UUID'),
     'description' => t('The UUID of this server.'),
     'setter callback' => 'entity_property_verbatim_set',
     'schema field' => 'uuid',
   );
   $properties['image'] = array(
-    'label' => t('Image UUID'),
     'description' => t('The UUID of the image used to build this server.'),
     'setter callback' => 'entity_property_verbatim_set',
     'schema field' => 'image',
   );
   $properties['flavor'] = array(
-    'label' => t('Flavor'),
     'description' => t('The flavor of this server.'),
     'setter callback' => 'entity_property_verbatim_set',
     'schema field' => 'flavor',
   );
   $properties['addresses'] = array(
-    'label' => t('IP Addresses'),
     'description' => t('The networks and IP addresses for this server.'),
     'setter callback' => 'entity_property_verbatim_set',
     'schema field' => 'addresses',
@@ -180,7 +171,8 @@ function opencloud_server_create($values = array()) {
  *   The server object.
  */
 function opencloud_server_load($server_id) {
-  return reset(entity_load('opencloud_server', array($server_id)));
+  $entity = entity_load('opencloud_server', array($server_id));
+  return reset($entity);
 }
 
 /**
@@ -240,7 +232,7 @@ function opencloud_server_access($op, $server = NULL, $account = NULL) {
 function opencloud_server_compute($provider_id) {
   $provider = opencloud_provider_load($provider_id);
   $cloud = opencloud_provider_connect($provider);
-  return $cloud->Compute(NULL, $provider->region);
+  return $cloud->computeService(null, $provider->region);
 }
 
 /**
@@ -329,27 +321,31 @@ function opencloud_server_import_all_servers($provider_id) {
  * @return array
  *   An array of properties.
  */
-function opencloud_server_map_properties($server, $provider_id) {
-  $properties = entity_get_property_info('opencloud_server');
+function opencloud_server_map_properties($server, $entity) {
+  $local_properties = entity_get_property_info('opencloud_server');
+  $local_properties = array_keys($local_properties['properties']);
 
-  $properties['name'] = $server->name;
-  $properties['provider_id'] = $provider_id;
-  $properties['status'] = $server->status;
-  $properties['uuid'] = $server->id;
-  $properties['hostid'] = $server->hostId;
-  $properties['image'] = $server->image->id;
-  $properties['flavor'] = $server->flavor->id;
-  $properties['addresses'] = json_encode($server->addresses);
+  $entity->name = $server->name;
+  $entity->provider_id = $entity->provider_id;
+  $entity->status = $server->status;
+  $entity->uuid = $server->id;
+  $entity->hostid = $server->hostId;
+  $entity->image = $server->image->id;
+  $entity->flavor = $server->flavor->id;
+  $entity->addresses = json_encode($server->addresses);
+  $entity->created = date("U", strtotime($server->created));
+  $entity->updated = date("U", strtotime($server->updated));
 
   // Allow other modules to provide mappings for their properties.
-  $provider = opencloud_provider_load($provider_id);
+  $provider = opencloud_provider_load($entity->provider_id);
   $context = array(
     'server' => clone $server,
     'provider' => clone $provider,
+    'local_properties' => $local_properties,
   );
-  drupal_alter('opencloud_server_map_properties', $properties, $context);
+  drupal_alter('opencloud_server_map_properties', $entity, $context);
 
-  return $array;
+  return $properties;
 }
 
 /**
@@ -398,7 +394,7 @@ function opencloud_server_rebuild_server($id, $options = array()) {
  * @return array
  *   An array of available flavors.
  */
-function opencloud_get_flavors($compute, $full = TRUE, $options = array()) {
+function opencloud_server_get_flavors($compute, $full = TRUE, $options = array()) {
   $return = array();
 
   $flavors = $compute->FlavorList();
@@ -422,7 +418,7 @@ function opencloud_get_flavors($compute, $full = TRUE, $options = array()) {
  * @return obj
  *   An Openstack flavor object.
  */
-function opencloud_get_flavor($compute, $id) {
+function opencloud_server_get_flavor($compute, $id) {
   return $compute->Flavor($id);
 }
 
@@ -440,7 +436,7 @@ function opencloud_get_flavor($compute, $id) {
  * @return array
  *   An array of available images.
  */
-function opencloud_get_images($compute, $full = TRUE, $options = array()) {
+function opencloud__server_get_images($compute, $full = TRUE, $options = array()) {
   $return = array();
 
   $images = $compute->ImageList($full, $options);
@@ -459,7 +455,7 @@ function opencloud_get_images($compute, $full = TRUE, $options = array()) {
  * @param bool $hard
  *   Whether to issue a hard reboot if available.
  */
-function opencloud_reboot_server($server, $hard = FALSE) {
+function opencloud_server_reboot_server($server, $hard = FALSE) {
   $server->Reboot();
   // @TODO Add check for what provider we are using so we can provide the right
   // constant for a hard or soft reboot.
@@ -485,4 +481,44 @@ function opencloud_server_views_api() {
     'api' => '3',
     'path' => drupal_get_path('module', 'opencloud_server') . '/includes/views',
   );
+}
+
+/**
+ * Implements hook_cron().
+ */
+function opencloud_server_cron() {
+  $fetch_queue = DrupalQueue::get('opencloud_server_fetch');
+  $query = db_select('opencloud_server', 'b');
+  $query->addField('b', 'server_id');
+  $query->condition('b.expires', REQUEST_TIME, '<=');
+  $result = $query->execute();
+  $records = $result->fetchAll();
+  foreach ($records as $record) {
+    $queue_item = array(
+      'server_id' => $record->server_id,
+    );
+    $fetch_queue->createItem($queue_item);
+  }
+}
+
+/**
+ * Implements hook_cron_queue_info().
+ */
+function opencloud_server_cron_queue_info() {
+  $queues['opencloud_server_fetch'] = array(
+    'worker callback' => 'opencloud_server_cron_queue_fetch',
+  );
+
+  return $queues;
+}
+
+/**
+ * Implements callback_cron_queue_info_worker().
+ */
+function opencloud_server_cron_queue_fetch($queue_item) {
+  $entity = opencloud_server_load($queue_item->server_id);
+
+  if (isset($entity) && $entity->expires < REQUEST_TIME) {
+    opencloud_server_save($entity);
+  }
 }

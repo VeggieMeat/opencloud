@@ -215,7 +215,8 @@ function opencloud_provider_create($values = array()) {
  *   The provider object.
  */
 function opencloud_provider_load($provider_id) {
-  return reset(entity_load('opencloud_provider', array($provider_id)));
+  $entities = entity_load('opencloud_provider', array($provider_id));
+  return reset($entities);
 }
 
 /**
@@ -302,7 +303,10 @@ function opencloud_provider_connect($provider) {
   $connection = new $class($provider->url, $credentials);
 
   // Let other provider modules alter the connection.
-  drupal_alter('opencloud_provider_connection', $connection);
+  $context = array(
+    'provider' => clone $provider,
+  );
+  drupal_alter('opencloud_provider_connection', $connection, $context);
 
   return $connection;
 }

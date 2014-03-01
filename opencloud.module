@@ -15,10 +15,12 @@ function opencloud_loaded() {
   $loaded = &drupal_static(__FUNCTION__);
   if (!isset($loaded)) {
     if (!class_exists('\OpenCloud\OpenStack') && module_exists('composer_manager')) {
-      composer_manager_register_autoload();
+      composer_manager_register_autoloader();
       $loaded = class_exists('\OpenCloud\OpenStack');
     }
   }
+
+  return $loaded;
 }
 
 /**
