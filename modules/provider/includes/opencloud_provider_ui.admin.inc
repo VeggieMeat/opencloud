@@ -76,6 +76,8 @@ function opencloud_provider_ui_settings() {
 function opencloud_provider_ui_provider_form_submit($form, &$form_state) {
   global $user;
 
+  $provider = entity_get_controller('opencloud_provider')->create();
+
   foreach ($form_state['values'] as $field => $value) {
     $provider->$field = $value;
   }
@@ -88,6 +90,11 @@ function opencloud_provider_ui_provider_form_submit($form, &$form_state) {
   $provider->updated = REQUEST_TIME;
 
   opencloud_provider_save($provider);
+
+  if ($provider->provider_id) {
+    drupal_set_message(t('Provider %name has been saved.', array('%name' => $provider->name)));
+    $form_state['redirect'] = 'admin/opencloud/providers';
+  }
 }
 
 /**
